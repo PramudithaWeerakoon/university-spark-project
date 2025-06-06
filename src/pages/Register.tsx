@@ -24,19 +24,19 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen university-gradient flex items-center justify-center px-4 py-8">
-      <div className="max-w-md w-full space-y-8">
+    <div className="min-h-screen university-gradient flex items-center justify-center px-4 py-6">
+      <div className="max-w-md w-full space-y-6 md:space-y-8">
         <div className="text-center">
-          <div className="mx-auto w-16 h-16 bg-amber-500 rounded-xl flex items-center justify-center mb-4">
-            <span className="text-blue-900 font-bold text-2xl">U</span>
+          <div className="mx-auto w-12 h-12 md:w-16 md:h-16 bg-amber-500 rounded-xl flex items-center justify-center mb-4">
+            <span className="text-blue-900 font-bold text-xl md:text-2xl">U</span>
           </div>
-          <h2 className="text-3xl font-bold text-white">Create Account</h2>
-          <p className="mt-2 text-blue-100">Join UniLearn and start your learning journey</p>
+          <h2 className="text-2xl md:text-3xl font-bold text-white">Create Account</h2>
+          <p className="mt-2 text-blue-100 text-sm md:text-base">Join UniLearn and start your learning journey</p>
         </div>
 
-        <div className="bg-white rounded-xl shadow-xl p-8">
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid grid-cols-2 gap-4">
+        <div className="bg-white rounded-xl shadow-xl p-6 md:p-8">
+          <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
+            <div className="grid grid-cols-2 gap-3 md:gap-4">
               <div>
                 <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-2">
                   First Name
@@ -47,7 +47,7 @@ const Register = () => {
                   required
                   value={formData.firstName}
                   onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm md:text-base"
                   placeholder="John"
                 />
               </div>
@@ -61,7 +61,7 @@ const Register = () => {
                   required
                   value={formData.lastName}
                   onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm md:text-base"
                   placeholder="Doe"
                 />
               </div>
@@ -77,7 +77,7 @@ const Register = () => {
                 required
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm md:text-base"
                 placeholder="student@university.edu"
               />
             </div>
@@ -90,7 +90,7 @@ const Register = () => {
                 id="role"
                 value={formData.role}
                 onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm md:text-base"
               >
                 <option value="student">Student</option>
                 <option value="instructor">Instructor</option>
@@ -108,7 +108,7 @@ const Register = () => {
                   required
                   value={formData.password}
                   onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent pr-10"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent pr-10 text-sm md:text-base"
                   placeholder="Create a strong password"
                 />
                 <button
@@ -132,7 +132,7 @@ const Register = () => {
                   required
                   value={formData.confirmPassword}
                   onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent pr-10"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent pr-10 text-sm md:text-base"
                   placeholder="Confirm your password"
                 />
                 <button
@@ -146,9 +146,9 @@ const Register = () => {
             </div>
 
             <div>
-              <label className="flex items-center">
-                <input type="checkbox" required className="rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
-                <span className="ml-2 text-sm text-gray-600">
+              <label className="flex items-start">
+                <input type="checkbox" required className="rounded border-gray-300 text-blue-600 focus:ring-blue-500 mt-0.5 mr-2 flex-shrink-0" />
+                <span className="text-sm text-gray-600">
                   I agree to the{' '}
                   <Link to="/terms" className="text-blue-600 hover:text-blue-500">
                     Terms of Service
@@ -163,7 +163,7 @@ const Register = () => {
 
             <button
               type="submit"
-              className="w-full flex justify-center items-center px-4 py-2 border border-transparent rounded-lg text-white bg-blue-900 hover:bg-blue-800 focus:ring-2 focus:ring-blue-500 transition-colors"
+              className="w-full flex justify-center items-center px-4 py-2 border border-transparent rounded-lg text-white bg-blue-900 hover:bg-blue-800 focus:ring-2 focus:ring-blue-500 transition-colors text-sm md:text-base"
             >
               <UserPlus className="w-4 h-4 mr-2" />
               Create Account
