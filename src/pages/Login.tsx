@@ -1,10 +1,11 @@
 
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { LogIn, Eye, EyeOff } from 'lucide-react';
+import { LogIn, Eye, EyeOff, User, GraduationCap } from 'lucide-react';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [loginType, setLoginType] = useState<'student' | 'instructor'>('student');
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -13,9 +14,14 @@ const Login = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate login
-    console.log('Login attempt:', formData);
-    navigate('/dashboard');
+    console.log('Login attempt:', { ...formData, loginType });
+    
+    // Navigate based on login type
+    if (loginType === 'instructor') {
+      navigate('/instructor-dashboard');
+    } else {
+      navigate('/dashboard');
+    }
   };
 
   return (
@@ -30,6 +36,36 @@ const Login = () => {
         </div>
 
         <div className="bg-white rounded-xl shadow-xl p-8">
+          {/* Login Type Selection */}
+          <div className="mb-6">
+            <div className="grid grid-cols-2 gap-2 p-1 bg-gray-100 rounded-lg">
+              <button
+                type="button"
+                onClick={() => setLoginType('student')}
+                className={`flex items-center justify-center gap-2 px-4 py-2 rounded-md transition-colors ${
+                  loginType === 'student'
+                    ? 'bg-white text-blue-900 shadow-sm'
+                    : 'text-gray-600 hover:text-gray-800'
+                }`}
+              >
+                <User className="w-4 h-4" />
+                Student
+              </button>
+              <button
+                type="button"
+                onClick={() => setLoginType('instructor')}
+                className={`flex items-center justify-center gap-2 px-4 py-2 rounded-md transition-colors ${
+                  loginType === 'instructor'
+                    ? 'bg-white text-blue-900 shadow-sm'
+                    : 'text-gray-600 hover:text-gray-800'
+                }`}
+              >
+                <GraduationCap className="w-4 h-4" />
+                Instructor
+              </button>
+            </div>
+          </div>
+
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
@@ -42,7 +78,7 @@ const Login = () => {
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="student@university.edu"
+                placeholder={`${loginType}@university.edu`}
               />
             </div>
 
@@ -85,7 +121,7 @@ const Login = () => {
               className="w-full flex justify-center items-center px-4 py-2 border border-transparent rounded-lg text-white bg-blue-900 hover:bg-blue-800 focus:ring-2 focus:ring-blue-500 transition-colors"
             >
               <LogIn className="w-4 h-4 mr-2" />
-              Sign In
+              Sign In as {loginType === 'student' ? 'Student' : 'Instructor'}
             </button>
           </form>
 
@@ -96,17 +132,6 @@ const Login = () => {
                 Create one now
               </Link>
             </p>
-          </div>
-
-          <div className="mt-6 border-t pt-6">
-            <div className="grid grid-cols-2 gap-3">
-              <button className="w-full px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">
-                Student Login
-              </button>
-              <button className="w-full px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">
-                Instructor Login
-              </button>
-            </div>
           </div>
         </div>
       </div>

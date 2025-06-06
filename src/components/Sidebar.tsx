@@ -7,7 +7,10 @@ import {
   MessageSquare, 
   FileText, 
   User, 
-  Settings 
+  Settings,
+  Users,
+  BarChart3,
+  GraduationCap
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -17,8 +20,11 @@ interface SidebarProps {
 
 const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
   const location = useLocation();
+  
+  // Determine if we're in instructor mode
+  const isInstructorMode = location.pathname.includes('instructor');
 
-  const menuItems = [
+  const studentMenuItems = [
     { icon: Home, label: 'Dashboard', path: '/dashboard' },
     { icon: BookOpen, label: 'My Courses', path: '/courses' },
     { icon: Calendar, label: 'Schedule', path: '/schedule' },
@@ -27,6 +33,20 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
     { icon: User, label: 'Profile', path: '/profile' },
     { icon: Settings, label: 'Settings', path: '/settings' },
   ];
+
+  const instructorMenuItems = [
+    { icon: Home, label: 'Dashboard', path: '/instructor-dashboard' },
+    { icon: BookOpen, label: 'My Courses', path: '/instructor/courses' },
+    { icon: Users, label: 'Students', path: '/instructor/students' },
+    { icon: FileText, label: 'Assignments', path: '/instructor/assignments' },
+    { icon: BarChart3, label: 'Analytics', path: '/instructor/analytics' },
+    { icon: MessageSquare, label: 'Discussions', path: '/instructor/discussions' },
+    { icon: Calendar, label: 'Schedule', path: '/instructor/schedule' },
+    { icon: User, label: 'Profile', path: '/profile' },
+    { icon: Settings, label: 'Settings', path: '/settings' },
+  ];
+
+  const menuItems = isInstructorMode ? instructorMenuItems : studentMenuItems;
 
   return (
     <>
@@ -44,6 +64,23 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
         ${isOpen ? 'translate-x-0' : '-translate-x-full'}
         lg:translate-x-0
       `}>
+        {/* Role Indicator */}
+        <div className="p-4 border-b">
+          <div className="flex items-center gap-2 text-sm font-medium text-gray-600">
+            {isInstructorMode ? (
+              <>
+                <GraduationCap className="w-4 h-4" />
+                Instructor View
+              </>
+            ) : (
+              <>
+                <User className="w-4 h-4" />
+                Student View
+              </>
+            )}
+          </div>
+        </div>
+
         <nav className="p-4">
           <ul className="space-y-2">
             {menuItems.map((item) => {
@@ -65,6 +102,18 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
             })}
           </ul>
         </nav>
+
+        {/* Quick Switch */}
+        <div className="absolute bottom-4 left-4 right-4">
+          <Link
+            to={isInstructorMode ? '/dashboard' : '/instructor-dashboard'}
+            className="flex items-center gap-2 px-3 py-2 text-sm text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+            onClick={() => onClose()}
+          >
+            {isInstructorMode ? <User className="w-4 h-4" /> : <GraduationCap className="w-4 h-4" />}
+            Switch to {isInstructorMode ? 'Student' : 'Instructor'} View
+          </Link>
+        </div>
       </aside>
     </>
   );
