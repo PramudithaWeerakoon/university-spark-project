@@ -25,7 +25,7 @@ const Layout = ({ children }: LayoutProps) => {
       <div className="flex">
         <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
         <main className="flex-1 lg:ml-64 pt-16">
-          <div className="p-6">
+          <div className="p-3 md:p-6">
             {children}
           </div>
         </main>

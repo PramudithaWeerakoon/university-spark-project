@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Search, Filter } from 'lucide-react';
 import CourseCard from '../components/CourseCard';
@@ -93,15 +92,15 @@ const Courses = () => {
   });
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 md:space-y-6 px-2 md:px-0">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Course Catalog</h1>
-        <p className="text-gray-600">Discover and enroll in courses to advance your learning</p>
+        <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Course Catalog</h1>
+        <p className="text-gray-600 text-sm md:text-base">Discover and enroll in courses to advance your learning</p>
       </div>
 
       {/* Search and Filter */}
-      <div className="bg-white p-6 rounded-lg shadow-md">
+      <div className="bg-white p-4 md:p-6 rounded-lg shadow-md">
         <div className="flex flex-col md:flex-row gap-4">
           <div className="flex-1 relative">
             <Search className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
@@ -110,7 +109,7 @@ const Courses = () => {
               placeholder="Search courses, instructors..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm md:text-base"
             />
           </div>
           <div className="flex items-center gap-2">
@@ -118,7 +117,7 @@ const Courses = () => {
             <select
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm md:text-base"
             >
               {categories.map(category => (
                 <option key={category.value} value={category.value}>
@@ -131,28 +130,28 @@ const Courses = () => {
       </div>
 
       {/* Course Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-gradient-to-r from-blue-500 to-blue-600 p-6 rounded-lg text-white">
-          <h3 className="text-lg font-semibold mb-2">Total Courses</h3>
-          <p className="text-3xl font-bold">{courses.length}</p>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+        <div className="bg-gradient-to-r from-blue-500 to-blue-600 p-4 md:p-6 rounded-lg text-white">
+          <h3 className="text-base md:text-lg font-semibold mb-2">Total Courses</h3>
+          <p className="text-2xl md:text-3xl font-bold">{courses.length}</p>
         </div>
-        <div className="bg-gradient-to-r from-green-500 to-green-600 p-6 rounded-lg text-white">
-          <h3 className="text-lg font-semibold mb-2">Available Now</h3>
-          <p className="text-3xl font-bold">{courses.length}</p>
+        <div className="bg-gradient-to-r from-green-500 to-green-600 p-4 md:p-6 rounded-lg text-white">
+          <h3 className="text-base md:text-lg font-semibold mb-2">Available Now</h3>
+          <p className="text-2xl md:text-3xl font-bold">{courses.length}</p>
         </div>
-        <div className="bg-gradient-to-r from-purple-500 to-purple-600 p-6 rounded-lg text-white">
-          <h3 className="text-lg font-semibold mb-2">New This Month</h3>
-          <p className="text-3xl font-bold">3</p>
+        <div className="bg-gradient-to-r from-purple-500 to-purple-600 p-4 md:p-6 rounded-lg text-white">
+          <h3 className="text-base md:text-lg font-semibold mb-2">New This Month</h3>
+          <p className="text-2xl md:text-3xl font-bold">3</p>
         </div>
       </div>
 
       {/* Results */}
       <div>
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-semibold text-gray-900">
+        <div className="flex flex-col md:flex-row md:items-center justify-between mb-4 md:mb-6 space-y-2 md:space-y-0">
+          <h2 className="text-lg md:text-xl font-semibold text-gray-900">
             {filteredCourses.length} Course{filteredCourses.length !== 1 ? 's' : ''} Found
           </h2>
-          <select className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+          <select className="px-3 md:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-sm md:text-base">
             <option>Sort by Popularity</option>
             <option>Sort by Rating</option>
             <option>Sort by Newest</option>
@@ -161,18 +160,18 @@ const Courses = () => {
         </div>
 
         {filteredCourses.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {filteredCourses.map((course) => (
               <CourseCard key={course.id} {...course} />
             ))}
           </div>
         ) : (
           <div className="text-center py-12">
-            <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Search className="w-8 h-8 text-gray-400" />
+            <div className="w-16 h-16 md:w-20 md:h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Search className="w-6 h-6 md:w-8 md:h-8 text-gray-400" />
             </div>
-            <h3 className="text-lg font-medium text-gray-900 mb-2">No courses found</h3>
-            <p className="text-gray-600">Try adjusting your search terms or filters</p>
+            <h3 className="text-base md:text-lg font-medium text-gray-900 mb-2">No courses found</h3>
+            <p className="text-gray-600 text-sm md:text-base">Try adjusting your search terms or filters</p>
           </div>
         )}
       </div>
