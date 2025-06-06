@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { LogIn, Eye, EyeOff, User, GraduationCap } from 'lucide-react';
+import { LogIn, Eye, EyeOff, User, GraduationCap, Info } from 'lucide-react';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -11,6 +11,18 @@ const Login = () => {
     password: ''
   });
   const navigate = useNavigate();
+
+  // Demo credentials
+  const demoCredentials = {
+    student: {
+      email: 'student@university.edu',
+      password: 'student123'
+    },
+    instructor: {
+      email: 'instructor@university.edu', 
+      password: 'instructor123'
+    }
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,6 +34,13 @@ const Login = () => {
     } else {
       navigate('/dashboard');
     }
+  };
+
+  const fillDemoCredentials = () => {
+    setFormData({
+      email: demoCredentials[loginType].email,
+      password: demoCredentials[loginType].password
+    });
   };
 
   return (
@@ -36,6 +55,27 @@ const Login = () => {
         </div>
 
         <div className="bg-white rounded-xl shadow-xl p-8">
+          {/* Demo Credentials Info */}
+          <div className="mb-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
+            <div className="flex items-start gap-3">
+              <Info className="w-5 h-5 text-blue-600 mt-0.5" />
+              <div>
+                <h4 className="font-medium text-blue-900 mb-2">Demo Credentials</h4>
+                <div className="text-sm text-blue-700 space-y-1">
+                  <p><strong>Student:</strong> {demoCredentials.student.email} / {demoCredentials.student.password}</p>
+                  <p><strong>Instructor:</strong> {demoCredentials.instructor.email} / {demoCredentials.instructor.password}</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={fillDemoCredentials}
+                  className="mt-2 text-sm text-blue-600 hover:text-blue-800 underline"
+                >
+                  Fill {loginType} demo credentials
+                </button>
+              </div>
+            </div>
+          </div>
+
           {/* Login Type Selection */}
           <div className="mb-6">
             <div className="grid grid-cols-2 gap-2 p-1 bg-gray-100 rounded-lg">
@@ -78,7 +118,7 @@ const Login = () => {
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder={`${loginType}@university.edu`}
+                placeholder={demoCredentials[loginType].email}
               />
             </div>
 
@@ -94,7 +134,7 @@ const Login = () => {
                   value={formData.password}
                   onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent pr-10"
-                  placeholder="Enter your password"
+                  placeholder={demoCredentials[loginType].password}
                 />
                 <button
                   type="button"
